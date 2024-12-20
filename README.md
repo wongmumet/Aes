@@ -41,8 +41,9 @@ streamlit run aes2.py
 6. Unduh hasil analisis dalam format Excel dengan menekan tombol "Download Results."
 
 ## Format Input
-File Excel yang diunggah harus memenuhi format berikut:
-- Satu kolom atau baris dengan nilai S-Box.
+1. File Excel: File memiliki satu sheet saja.
+2. Struktur Matriks: S-Box diatur dalam format matriks persegi n×n, di mana n adalah akar kuadrat dari jumlah elemen (misalnya, 16×16 untuk 256 elemen).
+3. Elemen Matriks: Setiap elemen dari S-Box ditempatkan di sel tabel Excel.
 
 ## Hasil
 Hasil analisis akan disajikan dalam tabel dan dapat diunduh sebagai file Excel. Parameter yang dihitung meliputi:
