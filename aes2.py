@@ -130,11 +130,22 @@ st.sidebar.header("Options")
 uploaded_file = st.sidebar.file_uploader("Upload S-Box File (Excel)", type=["xlsx", "xls"])
 
 if uploaded_file:
-    df = pd.read_excel(uploaded_file)
-    st.subheader("Uploaded S-Box")
-    st.dataframe(df)
+    # Baca file Excel
+    df = pd.read_excel(uploaded_file, header=None)  # Tanpa header
+    s_box_array = df.values.flatten()  # Ubah ke array 1D
 
-    s_box_array = df.values.flatten()
+    # Validasi panjang S-Box sebagai pangkat dua
+    n = len(s_box_array)
+    sqrt_n = int(np.sqrt(n))
+    if sqrt_n ** 2 != n:
+        st.error("S-Box harus memiliki panjang pangkat dua (misalnya: 16, 64, 256).")
+    else:
+        # Bentuk matriks
+        s_box_matrix = s_box_array.reshape((sqrt_n, sqrt_n))
+        
+        st.subheader("Uploaded S-Box in Matrix Form")
+        st.table(pd.DataFrame(s_box_matrix))  # Tampilkan sebagai tabel
+
 
     # Operation selection
     operations = st.sidebar.multiselect("Select Operations", ["NL", "SAC", "LAP", "DAP", "BIC-SAC", "BIC-NL"])
